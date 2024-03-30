@@ -57,8 +57,6 @@ filtered_df2 = df[df['Sector'] == X]
 
 #st.write('You selected:', selected_option)
 
-import matplotlib.pyplot as plt
-
 from PIL import Image
 import io
 #import os
