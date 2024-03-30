@@ -48,14 +48,6 @@ X = st.sidebar.selectbox('Sector', df['Sector'])
 # Filter data
 filtered_df1 = df[df['Stock Name'] == S]
 filtered_df2 = df[df['Sector'] == X]
-# Display the filtered data
-#st.write(filtered_df1,filtered_df2)
-#data.drop('index',axis=1)
-#options = ['Environment', 'Social', 'Governance']
-
-#selected_option = st.selectbox('Select an ESG Pillar Score:', options)
-
-#st.write('You selected:', selected_option)
 
 from PIL import Image
 import io
@@ -70,17 +62,7 @@ with st.sidebar:
     if api_key:
         os.environ['GOOGLE_API_KEY'] = api_key
      #   genai.configure(api_key=api_key)
-    #else:
-     #   if "api_key" in st.secrets:
-    #        genai.configure(api_key=st.secrets["api_key"])
-     #       st.success('API key already provided!', icon='✅')
-      #      api_key = st.secrets['GOOGLE_API_KEY']
-       # else:
-        #   api_key = st.text_input('Enter Google API Key:', type='password')
-         #   if not (api_key.startswith('AI')):
-         #     st.warning('Please enter your API Key!', icon='⚠️')
-          #  else:
-           #   st.success('Success!', icon='✅')
+
     
     "[Get a Google Gemini API key](https://ai.google.dev/)"
     "[View the source code](https://github.com/wms31/streamlit-gemini/blob/main/app.py)"
@@ -110,17 +92,6 @@ if "messages" not in st.session_state:
     st.session_state["messages"] = []
 messages = st.session_state["messages"]
 
-# The vision model gemini-pro-vision is not optimized for multi-turn chat.
-#if messages and select_model != "gemini-pro-vision":
- #   for item in messages:
-  #      role, parts = item.values()
-   #     if role == "user":
-    #        st.chat_message("user").markdown(parts[0])
-     #   elif role == "model":
-      #      st.chat_message("assistant").markdown(parts[0])
-
-#chat_message = st.chat_input("Say something")
-#generate_t2t = st.button("Generate my travel itinerary", key="generate_t2t")
 
 with st.container():
   destination_name = st.text_input("Stock Name: \n\n",value="MINT.BK")
@@ -135,6 +106,6 @@ with st.container():
   model = genai.GenerativeModel("gemini-pro", generation_config=config)
   if generate_t2t:
       with st.spinner("Generating your travel itinerary using Gemini..."):
-          response = model.generate_content("Please analyst ESG")
+          response = get_response(messages=messages, model="gemini-pro")
           st.write("Your plan:")
           st.write(response.text)
