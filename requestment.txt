@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+PIL
+matplotlib
+io
+google.generativeai
+google.ai.generativelanguage
